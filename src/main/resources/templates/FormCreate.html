@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form method="post" action="/user/create" th:object="${user}">
+		<input  type='text' th:field="*{username}"/>
+		<input type='text' th:field="*{password_hash}" required/>
+		<input type='text' th:field="*{email}"/>
+		<input type='text' th:field="*{role}"/>
+		<button type="submit">Xác nhận</button>
+	</form>
+</body>
+</html>
