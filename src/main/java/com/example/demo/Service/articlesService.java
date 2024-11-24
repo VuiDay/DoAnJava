@@ -13,10 +13,7 @@ public class articlesService {
 	@Autowired
 	public articlesRepostory repo;
 
-	public List<Articles> getlist() {
-		// TODO Auto-generated method stub
-		List<Articles> list = repo.findAll();
-		return list;
+	public Articles getDetail(Integer id) {
+		return repo.findArticleWithUserAndComments(id);
 	}
-	
 }

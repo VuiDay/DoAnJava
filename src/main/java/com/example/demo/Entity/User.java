@@ -1,5 +1,7 @@
 package com.example.demo.Entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,15 +15,19 @@ public class User {
     private String email;
     private String password;
     
+    @OneToMany(mappedBy = "user")
+    private List<Articles> articles;
+    
     public User() {
     } // No argument constructor is required by JPA
 
-	public User(int id, String username, String email, String password) {
+	public User(int id, String username, String email, String password, List<Articles> articles) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.articles = articles;
 	}
 
 	public int getId() {
@@ -55,5 +61,12 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-    
+
+	public List<Articles> getArticles() {
+		return articles;
+	}
+
+	public void setArticles(List<Articles> articles) {
+		this.articles = articles;
+	}
 }

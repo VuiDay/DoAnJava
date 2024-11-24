@@ -9,19 +9,22 @@ public class Comments {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int article_id;
     private int user_id;
     private String comment;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "article_id", referencedColumnName = "id")
+    private Articles article;
     
     public Comments() {
     } // No argument constructor is required by JPA
 
-	public Comments(int id, int article_id, int user_id, String comment) {
+	public Comments(int id, int user_id, String comment, Articles article) {
 		super();
 		this.id = id;
-		this.article_id = article_id;
 		this.user_id = user_id;
 		this.comment = comment;
+		this.article = article;
 	}
 
 	public int getId() {
@@ -30,14 +33,6 @@ public class Comments {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getArticle_id() {
-		return article_id;
-	}
-
-	public void setArticle_id(int article_id) {
-		this.article_id = article_id;
 	}
 
 	public int getUser_id() {
@@ -55,5 +50,15 @@ public class Comments {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	public Articles getArticle() {
+		return article;
+	}
+
+	public void setArticle(Articles article) {
+		this.article = article;
+	}
+
+	
 
 }

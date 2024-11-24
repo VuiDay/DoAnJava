@@ -108,7 +108,7 @@
 	      <section th:each="item: ${data}" class="world">
 	        <h2 th:text="${item.name}"></h2>
 	        <div th:each="article: ${item.articles}"  class="story story-1">
-              <a th:href="@{/article/{id}(id=${item.id})}">
+              <a th:href="@{/article/{id}(id=${article.id})}">
                 <div class="story-img">
                   <img th:src="${article.image}" alt="Protesters">
                 </div>

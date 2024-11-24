@@ -1,5 +1,8 @@
 package com.example.demo.Entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -12,8 +15,14 @@ public class Articles {
     private String title;
     private String content;
     private String image;
-    private String user_id;
     private String created_at;
+    
+    @OneToMany(mappedBy = "article" , cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Comments> comments  = new ArrayList<>();;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
     
     @ManyToOne(fetch = FetchType.LAZY) 
     @JoinColumn(name = "category_id")
@@ -22,15 +31,16 @@ public class Articles {
     public Articles() {
     }
 
-	public Articles(int id, String title, String content, String image, String user_id, String created_at,
-			Categories category) {
+	public Articles(int id, String title, String content, String image, String created_at, List<Comments> comments,
+			User user, Categories category) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.content = content;
 		this.image = image;
-		this.user_id = user_id;
 		this.created_at = created_at;
+		this.comments = comments;
+		this.user = user;
 		this.category = category;
 	}
 
@@ -66,20 +76,28 @@ public class Articles {
 		this.image = image;
 	}
 
-	public String getUser_id() {
-		return user_id;
-	}
-
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
-	}
-
 	public String getCreated_at() {
 		return created_at;
 	}
 
 	public void setCreated_at(String created_at) {
 		this.created_at = created_at;
+	}
+
+	public List<Comments> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<Comments> comments) {
+		this.comments = comments;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Categories getCategory() {
