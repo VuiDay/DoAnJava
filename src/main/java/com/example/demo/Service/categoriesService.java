@@ -1,5 +1,6 @@
 package com.example.demo.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,4 +19,22 @@ public class categoriesService {
 		List<Categories> list = repo.findAllWithArticles();
 		return list;
 	}
+
+	public void save(Categories category) {
+        if(category.getCreated_at() == null) {
+            category.setCreated_at(new Date(System.currentTimeMillis()));
+        }
+        repo.save(category);
+    }
+
+	
+    public void deleteById(Integer id) {
+        repo.deleteById(id); 
+    }
+
+    public Categories findById(Integer id) {
+        return repo.findById(id).orElse(null);
+    }
+
+	
 }
