@@ -18,7 +18,7 @@ public class Articles {
     private String created_at;
     
     @OneToMany(mappedBy = "article" , cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<Comments> comments  = new ArrayList<>();;
+    private List<Comments> comments  = new ArrayList<>();
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")

@@ -46,8 +46,8 @@
             <li><a href="#sport.html" title="Sport">Sport</a></li>
             <li><a href="#entertainment.html" title="Entertainment">Entertainment</a></li>
             <li>
-              <a href="#more" title="More">More...<span class="dropdown-toggle" aria-expanded="false"></span>
-                <span class="screen-reader-text">Expand child menu</span></a>
+              <a href="#" th:if="${username != null}" title="User">Xin chào, <span th:text="${username}"></span></a>
+				<a href="/login" th:if="${username == null}" title="Login">Đăng nhập</a>
               <ul class="sub-menu">
                 <li><a href="#" title="Science">Science</a></li>
                 <li><a href="#" title="Travel">Travel</a></li>
@@ -57,6 +57,7 @@
                 <li><a href="#" title="Video">Video</a></li>
               </ul>
             </li>
+            <li><a href="/logout" th:if="${username != null}" title="Entertainment">Đăng xuất</a></li>
           </ul>
           <div class="burger">
             <div class="line-1"></div>
