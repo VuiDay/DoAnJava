@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Register - TechJobs</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Roboto Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" type="text/css" th:href="@{/auth/css/bootstrap.min.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/auth/css/style.css}" />
+  </head>
+  <body>
+    <div class="container-fluid login-fluid clear-left clear-right">
+      <div class="login-container">
+
+        <div class="clearfix"></div>
+
+        <div class="padding-top-90"></div>
+
+        <!-- login main -->
+        <div class="login-main">
+          <div class="w-login m-auto">
+            <div class="row">
+              <!-- login main descriptions -->
+              <div class="col-md-6 col-sm-12 col-12 login-main-left">
+                <img th:src="@{/auth/img/banner-login.png}" >
+              </div>
+              <!-- login main form -->
+              <div class="col-md-6 col-sm-12 col-12 login-main-right">
+                <form method="post" action="/user/create" th:object="${user}" class="login-form reg-form">
+                  <div class="login-main-header">
+                    <h3>Đăng Ký</h3>
+                  </div>
+                  <div class="input-div one">
+                    <div class="div lg-lable">
+                      <h5>Họ Và Tên<span class="req">*</span></h5>
+                      <input type="text" class="input form-control-lgin" name="username" />
+                    </div>
+                  </div>
+                  <div class="input-div one">
+                    <div class="div lg-lable">
+                      <h5>Địa Chỉ Email<span class="req">*</span></h5>
+                      <input type="text" class="input form-control-lgin" name="email" />
+                    </div>
+                  </div>
+                  <div class="input-div one">
+                    <div class="div lg-lable">
+                      <h5>Số điện thoại<span class="req">*</span></h5>
+                      <input type="text" class="input form-control-lgin" name="phone" />
+                    </div>
+                  </div>
+                  <div class="input-div one">
+                    <div class="div lg-lable">
+                      <h5>Mật khẩu<span class="req">*</span></h5>
+                      <input type="password" class="input form-control-lgin" name="password" />
+                    </div>
+                  </div>
+                  <div class="form-group d-block frm-text">
+                    <a href="#" class="fg-login d-inline-block"></a>
+                    <a href="/login" class="fg-login float-right d-inline-block"
+                      >Bạn đã có tài khoản? Đăng Nhập</a
+                    >
+                  </div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary float-right btn-login d-block w-100"
+                  >
+                    Đăng Ký
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- (end) login main -->
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script  th:src="@{/auth/js/jquery-3.4.1.slim.min.js}"></script>
+    <script  th:src="@{/auth/js/popper.min.js}"></script>
+    <script th:src="@{/auth/js/bootstrap.min.js}"></script>
+
+    <script type="text/javascript" th:src="@{/auth/js/main.js}"></script>
+    
+    
+  </body>
+</html>
