@@ -39,24 +39,25 @@
         <!-- Navigation -->
         <nav class="nav-menu" role="navigation">
           <ul class="nav-links">
-            <li><a href="index.html" title="Home">Home</a></li>
-            <li><a href="article.html" title="World">World</a>
-            <li><a href="#politics.html" title="Politics">Politics</a></li>
-            <li><a href="#business.html" title="Business">Business</a></li>
-            <li><a href="#sport.html" title="Sport">Sport</a></li>
-            <li><a href="#entertainment.html" title="Entertainment">Entertainment</a></li>
+            <li><a href="${Home}" title="Home">Trang chủ</a></li>
+            <li><a href="article.html" title="World">Thế giới</a>
+            <li><a href="#politics.html" title="Politics">Chính trị</a></li>
+            <li><a href="#business.html" title="Business">Kinh doanh</a></li>
+            <li><a href="#sport.html" title="Sport">Thể thao</a></li>
+            <li><a href="#entertainment.html" title="Entertainment">Giải trí</a></li>
             <li>
-              <a href="#more" title="More">More...<span class="dropdown-toggle" aria-expanded="false"></span>
-                <span class="screen-reader-text">Expand child menu</span></a>
+              <a href="#" th:if="${username != null}" title="User">Xin chào, <span th:text="${username}"></span></a>
+				<a href="/login" th:if="${username == null}" title="Login">Đăng nhập</a>
               <ul class="sub-menu">
-                <li><a href="#" title="Science">Science</a></li>
-                <li><a href="#" title="Travel">Travel</a></li>
-                <li><a href="#" title="Health">Health</a></li>
-                <li><a href="#" title="Style">Style</a></li>
-                <li><a href="#" title="Weather">Weather</a></li>
+                <li><a href="#" title="Science">Khoa học</a></li>
+                <li><a href="#" title="Travel">Du lịch</a></li>
+                <li><a href="#" title="Health">Sức khoẻ</a></li>
+                <li><a href="#" title="Style">Phong cách</a></li>
+                <li><a href="#" title="Weather">Thời tiết</a></li>
                 <li><a href="#" title="Video">Video</a></li>
               </ul>
             </li>
+            <li><a href="/logout" th:if="${username != null}" title="Entertainment">Đăng xuất</a></li>
           </ul>
           <div class="burger">
             <div class="line-1"></div>
@@ -105,10 +106,10 @@
       </div> <!-- End of class="top-news" -->
       
       <div >
-	      <section th:each="item: ${data}" class="world">
+	      <section th:each="item:${data}" class="world">
 	        <h2 th:text="${item.name}"></h2>
-	        <div th:each="article: ${item.articles}"  class="story story-1">
-              <a th:href="@{/article/{id}(id=${item.id})}">
+	        <div th:each="article:${item.articles}"  class="story story-1">
+              <a th:href="@{/article/{id}(id=${article.id})}">
                 <div class="story-img">
                   <img th:src="${article.image}" alt="Protesters">
                 </div>
@@ -122,7 +123,7 @@
       </div>
 
      
-        <h2>Entertainment</h2>
+        <h2>Giải trí</h2>
         <div class="story">
           <a href="#">
             <div class="story-img">

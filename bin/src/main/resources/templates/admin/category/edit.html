@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/fragments/head :: head"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <div th:replace="admin/fragments/header :: header"></div>
+    <div th:replace="admin/fragments/sidebar :: sidebar"></div>
+
+    <div class="content-wrapper">
+        <section class="content-header">
+            <h1>
+                Sửa danh mục
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a th:href="@{/admin/category}">Categories</a></li>
+                <li class="active">Edit</li>
+            </ol>
+        </section>
+
+        <section class="content">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Sửa danh mục</h3>
+                </div>
+                <div class="box-body">
+                    <form th:action="@{/admin/category/edit/{id}(id=${category.id})}" th:object="${category}" method="post">
+                        <input type="hidden" th:field="*{id}">
+                        <div class="form-group">
+                            <label>Tên danh mục</label>
+                            <input type="text" class="form-control" th:field="*{name}" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                        <a th:href="@{/admin/category}" class="btn btn-default">Hủy</a>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div th:replace="admin/fragments/footer :: footer"></div>
+</div>
+
+<script th:src="@{/admin/js/jquery.min.js}"></script>
+<script th:src="@{/admin/js/jquery-ui.js}"></script>
+<script th:src="@{/admin/js/bootstrap.min.js}"></script>
+<script th:src="@{/admin/js/adminlte.min.js}"></script>
+<script th:src="@{/admin/js/dashboard.js}"></script>
+<script th:src="@{/admin/js/function.js}"></script>
+</body>
+</html>
