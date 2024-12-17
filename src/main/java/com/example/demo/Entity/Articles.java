@@ -107,4 +107,5 @@ public class Articles {
 	public void setCategory(Categories category) {
 		this.category = category;
 	}
+
 }
