@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/fragments/head :: head"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header th:replace="admin/fragments/header :: header"></header>
+        <aside th:replace="admin/fragments/sidebar :: sidebar"></aside>
+        
+        <div class="content-wrapper">
+            <section class="content-header">
+                <h1>Quản lý bài viết</h1>
+            </section>
+
+            <section class="content">
+                <div class="box">
+                    <div class="box-header">
+                        <a th:href="@{/admin/articles/add}" class="btn btn-primary">Thêm mới</a>
+                    </div>
+                    <div class="box-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tiêu đề</th>
+                                    <th>Nội dung</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Danh mục</th>
+                                    <th>Tác giả</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="article : ${data}">
+                                    <td th:text="${article.id}"></td>
+                                    <td th:text="${article.title}"></td>
+                                    <td th:text="${article.content}"></td>
+                                    <td>
+                                        <img th:if="${article.image}" 
+                                             th:src="@{${article.image}}" 
+                                             style="max-width: 100px;" />
+                                    </td>
+                                    <td th:text="${article.category?.name}"></td>
+                                    <td th:text="${article.user?.username}"></td>
+                                    <td th:text="${article.created_at}"></td>
+                                    <td>
+                                        <a th:href="@{/admin/articles/edit/{id}(id=${article.id})}" 
+                                           class="btn btn-warning btn-sm">Sửa</a>
+                                        <a th:href="@{/admin/articles/delete/{id}(id=${article.id})}" 
+                                           class="btn btn-danger btn-sm" 
+                                           onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer th:replace="admin/fragments/footer :: footer"></footer>
+    </div>
+    
+    <script th:src="@{/admin/js/jquery.min.js}"></script>
+    <script th:src="@{/admin/js/bootstrap.min.js}"></script>
+    <script th:src="@{/admin/js/adminlte.min.js}"></script>
+</body>
+</html>
