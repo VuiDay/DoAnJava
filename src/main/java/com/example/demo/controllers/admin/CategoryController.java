@@ -12,22 +12,6 @@ import org.springframework.ui.Model;
 import com.example.demo.Entity.Categories;
 import com.example.demo.Service.categoriesService;
 
-
-//@Controller
-//
-//public class CategoryController {
-//	   
-//	   
-//	   @RequestMapping("admin/category")
-//       public String index() {
-//    	   return "admin/category/index";
-//       }
-//       
-//       @RequestMapping("admin/add-category")
-//       public String add() {
-//    	   return "admin/category/add";
-//       }
-//}
 @Controller
 @RequestMapping("/admin/category")
 public class CategoryController {
