@@ -37,22 +37,6 @@ public class AdminUserController {
         userService.save(user);
         return "redirect:/admin/user";
     }
-
-//    // UPDATE - Hiển thị form edit
-//    @GetMapping("/edit/{id}")
-//    public String showEditForm(@PathVariable("id") Integer id, Model model) {
-//        Optional<User> user = userService.findById(id);
-//        model.addAttribute("user", user);
-//        return "admin/user/edit";
-//    }
-//
-//    // UPDATE - Xử lý cập nhật
-//    @PostMapping("/edit/{id}")
-//    public String updateUser(@PathVariable("id") Integer id, @ModelAttribute User user) {
-//        user.setId(id);
-//        userService.save(user);
-//        return "redirect:/admin/user";
-//    }
  // UPDATE - Hiển thị form edit
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") Integer id, Model model) {
