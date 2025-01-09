@@ -62,8 +62,3 @@ public class Categories {
 		 this.created_at = created_at;
 	}
 }
-
-
-
-
-    

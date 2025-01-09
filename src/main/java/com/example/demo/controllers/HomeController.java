@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.demo.Entity.Articles;
 import com.example.demo.Entity.Categories;
@@ -31,46 +32,19 @@ public class HomeController {
 		User loggedInUser  = (User) session.getAttribute("loggedInUser");
 		if (loggedInUser != null) {
 	        model.addAttribute("username", loggedInUser.getUsername());
+	        model.addAttribute("role", loggedInUser.getRole());
+	        
 	    } else {
 	        model.addAttribute("username", null);
 	    }
-		return "index";
+		return "client/homePage";
 	}
-	
-	 @GetMapping("/technology")
-	    public String showTechnologyArticles(Model model) {
-	     
-	        List<Articles> technologyArticles = articlesService.getArticlesByCategoryId(1);
-	        model.addAttribute("articles", technologyArticles);
-	        return "technology";
+
+	 
+	 @GetMapping("/category/{id}")
+	    public String health(@PathVariable Integer id, Model model) {	
+	    	List<Articles> businessArticles = articlesService.getArticlesByCategoryId(id);
+	        model.addAttribute("articles", businessArticles);
+	        return "client/archive"; 
 	    }
-
-	
-    @GetMapping("/health")
-    public String health(Model model) {	
-    	List<Articles> businessArticles = articlesService.getArticlesByCategoryId(2);
-        model.addAttribute("articles", businessArticles);
-        return "health"; 
-    }
-
-    @GetMapping("/business")
-    public String business(Model model) {
-    	List<Articles> businessArticles = articlesService.getArticlesByCategoryId(5);
-        model.addAttribute("articles", businessArticles);
-        return "business"; 
-    }
-
-    @GetMapping("/sport")
-    public String sport(Model model) {
-    	 List<Articles> sportArticles = articlesService.getArticlesByCategoryId(3);
-         model.addAttribute("articles", sportArticles);
-         return "sport"; 
-    }
-
-    @GetMapping("/entertainment")
-    public String entertainment(Model model) {
-    	 List<Articles> entertainmentArticles = articlesService.getArticlesByCategoryId(4);
-         model.addAttribute("articles", entertainmentArticles);
-        return "entertainment"; 
-    }
 }

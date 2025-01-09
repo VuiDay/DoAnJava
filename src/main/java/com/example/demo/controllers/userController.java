@@ -49,7 +49,7 @@ public class userController {
 	    public String login(User user, HttpSession session, Model model) {
 	        boolean isAuthenticated = service.login(user.getUsername(), user.getPassword(), session);
 	        if (isAuthenticated) {
-	            return "redirect:/"; 
+	            return "redirect:/Home"; 
 	        } else {
 	            model.addAttribute("error", "Invalid username or password!");
 	            return "/auth/login"; 

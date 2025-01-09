@@ -13,6 +13,7 @@ public class User {
     private int id;
     private String username;
     private String email;
+    private int role;
     private String password;
     
     @OneToMany(mappedBy = "user")
@@ -21,9 +22,10 @@ public class User {
     public User() {
     } // No argument constructor is required by JPA
 
-	public User(int id, String username, String email, String password, List<Articles> articles) {
+	public User(int id, int role, String username, String email, String password, List<Articles> articles) {
 		super();
 		this.id = id;
+		this.role = role;
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -54,6 +56,14 @@ public class User {
 		this.email = email;
 	}
 
+	public int getRole() {
+		return role;
+	}
+
+	public void setRole(int role) {
+		this.role = role;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -69,4 +79,6 @@ public class User {
 	public void setArticles(List<Articles> articles) {
 		this.articles = articles;
 	}
+
+	
 }
