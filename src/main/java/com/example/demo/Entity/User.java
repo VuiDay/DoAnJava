@@ -1,13 +1,10 @@
 package com.example.demo.Entity;
-
 import java.util.List;
-
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Users")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -15,10 +12,10 @@ public class User {
     private String email;
     private int role;
     private String password;
-    
+
     @OneToMany(mappedBy = "user")
     private List<Articles> articles;
-    
+
     public User() {
     } // No argument constructor is required by JPA
 
@@ -79,6 +76,7 @@ public class User {
 	public void setArticles(List<Articles> articles) {
 		this.articles = articles;
 	}
-
 	
 }
+
+

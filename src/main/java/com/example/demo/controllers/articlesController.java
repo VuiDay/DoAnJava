@@ -31,48 +31,29 @@ public class articlesController {
 	categoriesService categories;
 	
 	
-	 @GetMapping("/articles/{id}")
-	 public String getArticles(@PathVariable Integer id, Model model) {
+	@GetMapping("/articles/{id}")
+    public String getArticles(@PathVariable Integer id, Model model) {
         Articles article = service.getDetail(id);
-        Categories category = article.getCategory(); 
+
         if (article != null) {
+            Categories category = article.getCategory();
+
             model.addAttribute("article", article);
             model.addAttribute("author", article.getUser());
-            model.addAttribute("category", category.getName());
+            model.addAttribute("category", category != null ? category.getName() : "Unknown");
             model.addAttribute("comments", article.getComments() != null ? article.getComments() : new ArrayList<>());
-            
+
             List<Articles> otherArticles = service.getOtherArticles(id);
             model.addAttribute("otherArticles", otherArticles);
-            
-        	List<Articles> limitedArticles = otherArticles.size() > 6 ? otherArticles.subList(0, 6) : otherArticles;
-        	model.addAttribute("limitedArticles", limitedArticles);
-        	
+
+            // Lấy tối đa 6 bài viết
+            int limit = Math.min(otherArticles.size(), 6);
+            List<Articles> limitedArticles = otherArticles.subList(0, limit);
+            model.addAttribute("limitedArticles", limitedArticles);
+
             return "client/detailArticle";
         } else {
             return "redirect:/";
         }
     }
-
-	 @PostMapping("/articles/{id}/comments")
-	 public String addComment(@PathVariable Integer id, @RequestParam String content, HttpSession session) {
-	     // Lấy user từ session
-	     User loggedInUser = (User) session.getAttribute("loggedInUser");
-	     if (loggedInUser == null) {
-	         return "redirect:/login"; // Nếu người dùng chưa đăng nhập
-	     }
-
-	     // Tạo đối tượng Comment mới
-	     Comments comment = new Comments();
-	     comment.setUser_id(loggedInUser.getId()); // Lấy user_id từ session
-	     comment.setComment(content);
-
-	     // Lấy bài viết theo article_id và gán vào comment
-	     Articles article = service.getDetail(id);
-	     comment.setArticle(article);
-
-	     // Thêm bình luận vào cơ sở dữ liệu
-	     commentService.addComment(comment);
-
-	     return "redirect:/articles/" + id; // Quay lại trang chi tiết bài viết sau khi thêm bình luận
-	 }
  }
