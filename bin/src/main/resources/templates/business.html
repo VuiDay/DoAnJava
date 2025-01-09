@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="UTF-8">
+<meta name="description"
+	content="The latest international news from Frivizn, featuring top stories from around the world and breaking news, as it happens.">
+<meta name="author" content="dukibu">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Home | Frivizn News</title>
+
+<link
+	href="https://fonts.googleapis.com/css?family=Exo+2:400,700|Open+Sans&display=swap"
+	rel="stylesheet">
+<link
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="css/normalize.css">
+<link rel="stylesheet" href="css/main.css">
+
+<style>
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Main container */
+.main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Section: Breaking News */
+.top-news {
+    margin-bottom: 40px;
+}
+
+.latest-news .headline {
+    background-color: #f8d7da;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.latest-news p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #721c24;
+    margin: 0;
+}
+
+.latest-news h1 {
+    font-size: 28px;
+    color: #721c24;
+    margin: 10px 0 0 0;
+}
+
+.latest-news a {
+    text-decoration: none;
+}
+
+/* Section: Top Stories */
+.top-stories {
+    margin-bottom: 40px;
+}
+
+.top-stories h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.top-stories .headline {
+    background-color: #e2e3e5;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.top-stories .headline a {
+    text-decoration: none;
+}
+
+.top-stories .headline h1 {
+    font-size: 22px;
+    color: #333;
+    margin: 0;
+}
+
+.top-stories .headline-1 {
+    background-color: #d4edda;
+}
+
+.top-stories .headline-2 {
+    background-color: #c3e6cb;
+}
+
+.top-stories .headline-3 {
+    background-color: #bee5eb;
+}
+
+/* Section: Articles List */
+.article-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.story {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.story:hover {
+    transform: translateY(-5px);
+}
+
+.story-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-bottom: 2px solid #f1f1f1;
+}
+
+.story-headline {
+    padding: 15px;
+}
+
+.story-headline h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.story-headline p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Media Queries for responsive design */
+@media (max-width: 768px) {
+    .main {
+        padding: 10px;
+    }
+
+    .top-stories h2,
+    .latest-news h1 {
+        font-size: 22px;
+    }
+
+    .story-headline h3 {
+        font-size: 18px;
+    }
+}
+
+</style>
+</head>
+
+<body id="top">
+
+	<div class="content-wrap">
+
+		<!--[if IE]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+
+		<!-- Header -->
+		<header role="banner">
+
+			<section class="nav-section">
+
+				<!-- Logo -->
+				<div class="logo">
+					<a href="index.html" title="Frivizn logo">Frivizn</a>
+				</div>
+
+				<!-- Navigation -->
+				<nav class="nav-menu" role="navigation">
+					<ul class="nav-links">
+						<li><a th:href="@{/Home}" title="Home">Trang chủ</a></li>
+						<li><a th:href="@{/technology}" title="Technology">Công nghệ</a></li>
+						<li><a th:href="@{/health}" title="Health">Sức khỏe</a></li>
+						<li><a th:href="@{/business}" title="Business">Kinh doanh</a></li>
+						<li><a th:href="@{/sport}" title="Sport">Thể thao</a></li>
+						<li><a th:href="@{/entertainment}" title="Entertainment">Giải trí</a></li>
+
+						<li><a href="#" th:if="${username != null}" title="User">Xin chào, <span th:text="${username}"></span>
+						</a> <a href="/login" th:if="${username == null}" title="Login">Đăng nhập</a>
+							<ul class="sub-menu">
+								<li><a href="#" title="Science">Khoa học</a></li>
+								<li><a href="#" title="Travel">Du lịch</a></li>
+								<li><a href="#" title="Health">Sức khoẻ</a></li>
+								<li><a href="#" title="Style">Phong cách</a></li>
+								<li><a href="#" title="Weather">Thời tiết</a></li>
+								<li><a href="#" title="Video">Video</a></li>
+							</ul></li>
+						<li><a href="/logout" th:if="${username != null}"
+							title="Entertainment">Đăng xuất</a></li>
+					</ul>
+					<div class="burger">
+						<div class="line-1"></div>
+						<div class="line-2"></div>
+						<div class="line-3"></div>
+					</div>
+				</nav>
+			</section>
+			<!-- end of class="nav-section"-->
+
+		</header>
+
+		<main class="main" role="main">
+
+    <!-- Section: Breaking News for Sports -->
+    <div class="top-news">
+        <section class="latest-news">
+            <div class="headline">
+                <p>Breaking News</p>
+                <a href="article.html">
+                    <h1>Lorem ipsum dolor sit amet</h1>
+                </a>
+            </div>
+        </section>
+        <!-- End of class="latest-news" -->
+
+        <!-- Section: Top Sports Stories -->
+        <section class="top-stories">
+            <h2>Tin nổi bật thể thao</h2>
+
+            <div class="headline headline-1">
+                <a href="#">
+                    <h1>Quisque sit amet mi lectus</h1>
+                </a>
+            </div>
+
+            <div class="headline headline-2">
+                <a href="#">
+                    <h1>Cras placerat augue tellus</h1>
+                </a>
+            </div>
+
+            <div class="headline headline-3">
+                <a href="#">
+                    <h1>Rutrum laoreet non pulvinar</h1>
+                </a>
+            </div>
+        </section>
+        <!-- End of class="top-stories" -->
+    </div>
+    <!-- End of class="top-news" -->
+
+    <!-- Section: Articles List for Sports -->
+    <section class="article-list">
+        <div th:each="articles : ${articles}" class="story story-1">
+            <a th:href="@{/articles/{id}(id=${articles.id})}">
+                <div class="story-img">
+                    <img th:src="${articles.image}" alt="Ảnh bài viết thể thao">
+                </div>
+                <div class="story-headline">
+                    <h3 th:text="${articles.title}"></h3>
+                    <p>
+                        Ngày đăng: <span th:text="${articles.created_at}"></span>
+                    </p>
+                </div>
+            </a>
+        </div>
+    </section>
+    <!-- End of section: article-list -->
+
+</main>
+
+
+		<!-- End of class="main" -->
+
+
+		<!-- Footer Links -->
+		<div class="footer-links">
+
+			<ul class="social-media-links">
+				<li><a href="http://twitter.com"><span
+						class="screen-reader-text">Twitter</span></a></li>
+				<li><a href="http://facebook.com"><span
+						class="screen-reader-text">Facebook</span></a></li>
+				<li><a href="http://linkedin.com"><span
+						class="screen-reader-text">LinkedIn</span></a></li>
+				<li><a href="http://youtube.com"><span
+						class="screen-reader-text">YouTube</span></a></li>
+				<li><a href="http://instagram.com"><span
+						class="screen-reader-text">Instagram</span></a></li>
+			</ul>
+
+
+
+			<ul class="info-links">
+				<li><a href="#terms-of-use" title="Terms of Use">Terms of
+						Use</a></li>
+				<li><a href="#privacy-policy" title="Privacy Policy">Privacy
+						Policy</a></li>
+				<li><a href="#about-us" title="About Us">About Us</a></li>
+				<li><a href="#advertising" title="Advertising">Advertising</a></li>
+				<li><a href="#sitemap" title="Sitemap">Sitemap</a></li>
+			</ul>
+
+			<ul class="our-address">
+				<li>Our Address:</li>
+				<li>Main Street 123</li>
+				<li>New York, NY 10000</li>
+				<li>111-222-3333</li>
+			</ul>
+
+		</div>
+		<!-- End of class="footer-links" -->
+
+		<!-- Footer Credit -->
+		<footer role="contentinfo">
+			<p>2024 &copy; by Frivizn Studio</p>
+			<a class="scroll-top" href="#top"></a>
+		</footer>
+
+	</div>
+	<!-- end of class="content-wrap" -->
+
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+		crossorigin="anonymous"></script>
+	<script src="js/main.js"></script>
+
+
+
+</body>
+
+</html>
