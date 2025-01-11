@@ -1,0 +1,150 @@
+<div th:fragment="header">
+<!-- Normalize CSS -->
+        <link rel="stylesheet" href="client/css/normalize.css">
+        <!-- Main CSS -->
+        <link rel="stylesheet" href="client/css/main.css">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="client/css/bootstrap.min.css">
+        <!-- Animate CSS -->
+        <link rel="stylesheet" href="client/css/animate.min.css">
+        <!-- Font-awesome CSS-->
+        <link rel="stylesheet" href="client/css/font-awesome.min.css">
+        <!-- Owl Caousel CSS -->
+        <link rel="stylesheet" href="client/vendor/OwlCarousel/owl.carousel.min.css">
+        <link rel="stylesheet" href="client/vendor/OwlCarousel/owl.theme.default.min.css">
+        <!-- Main Menu CSS -->
+        <link rel="stylesheet" href="client/css/meanmenu.min.css">
+        <!-- Magnific CSS -->
+        <link rel="stylesheet" type="text/css" href="client/css/magnific-popup.css">
+        <!-- Switch Style CSS -->
+        <link rel="stylesheet" href="client/css/hover-min.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="client/style.css">
+        <!-- For IE -->
+        <link rel="stylesheet" type="text/css" href="client/css/ie-only.css" />
+        <!-- Modernizr Js -->
+        <script src="js/modernizr-2.8.3.min.js"></script>
+<header>
+                <div id="header-layout2" class="header-style2">
+                    <div class="header-top-bar">
+                        
+                        <div class="top-bar-bottom bg-body pt-20 d-none d-lg-block">
+                            <div class="container">
+                                <div class="row d-flex align-items-center">
+                                    <div class="col-lg-4 col-md-4 col-sm-4">
+                                        <div class="logo-area">
+                                            <a href="/" class="img-fluid">
+                                               <img th:src="@{/client/img/logo-dark.png}" alt="logo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-8">
+                                        <div class="ne-banner-layout1 pull-right">
+                                            <a href="#">
+                                                <img th:src="@{/client/img/banner/banner2.jpg}" alt="ad" class="img-fluid">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-menu-area bg-body" id="sticker">
+                        <div class="container">
+                            <div class="row no-gutters d-flex align-items-center">
+                                <div class="col-lg-10 position-static d-none d-lg-block">
+                                    <div class="ne-main-menu">
+                                        <nav id="dropdown">
+                                            <ul>
+                                                <li class="">
+                                                    <a href="/">Home</a>
+                                                </li>
+                                                <li th:each="item:${data}">
+                                                    <a th:href="@{/category/{id}(id=${item.id})}" th:text="${item.name}" href="post-style-1.html"></a>
+                                                </li>
+                                                <li class="active">
+                                                    <a href="/admin/articles/client-add">Thêm bài việt</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-12 text-right position-static">
+                                    <div class="header-action-item on-mobile-fixed">
+                                        <ul style="display: flex;">
+                                            <li class="">
+                                                <a th:if="${username == null}" href="/login" type="button" class="login-btn" >
+                                                    <i class="fa fa-user" aria-hidden="true"></i>Sign in
+                                                </a>
+                                                
+                                                <a href="#" style="color: black;" class="login-btn" th:if="${username != null}" title="User">Xin chào, <span th:text="${username}"></span></a>
+                                                
+                                                <a href="/logout" style="color: white; background-color: coral; border-radius: 50px; text-align: center" class="login-btn" th:if="${username != null}" title="Entertainment">Đăng xuất</a>
+                                            </li>
+                                            <li>
+                                                <a  style="color: black;"  th:if="${role == 1}" href="/admin" type="button" class="login-btn">
+    												<i class="fa fa-user"  aria-hidden="true"></i> Admin
+												</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- Header Area End Here -->
+            <!-- News Feed Area Start Here -->
+            <section class="bg-accent add-top-margin">
+                <div class="container">
+                    <div class="row no-gutters d-flex align-items-center">
+                        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
+                            <div class="topic-box mt-10 mb-10">Top Stories</div>
+                        </div>
+                        <div class="col-lg-10 col-md-9 col-sm-8 col-6">
+                            <div class="feeding-text-dark">
+                                <ol id="sample" class="ticker">
+                                    <li>
+                                        <a href="#">Chia sẻ những thông tin bổ ich của bạn với mọi người</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Tin tức được kiểm duyệt gắt gao</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Tin tức mới theo ngày</a>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <script src="client/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+        <!-- Plugins js -->
+        <script src="client/js/plugins.js" type="text/javascript"></script>
+        <!-- Popper js -->
+        <script src="client/js/popper.js" type="text/javascript"></script>
+        <!-- Bootstrap js -->
+        <script src="client/js/bootstrap.min.js" type="text/javascript"></script>
+        <!-- WOW JS -->
+        <script src="client/js/wow.min.js"></script>
+        <!-- Owl Cauosel JS -->
+        <script src="client/vendor/OwlCarousel/owl.carousel.min.js" type="text/javascript"></script>
+        <!-- Meanmenu Js -->
+        <script src="client/js/jquery.meanmenu.min.js" type="text/javascript"></script>
+        <!-- Srollup js -->
+        <script src="client/js/jquery.scrollUp.min.js" type="text/javascript"></script>
+        <!-- jquery.counterup js -->
+        <script src="client/js/jquery.counterup.min.js"></script>
+        <script src="client/js/waypoints.min.js"></script>
+        <!-- Isotope js -->
+        <script src="client/js/isotope.pkgd.min.js" type="text/javascript"></script>
+        <!-- Magnific Popup -->
+        <script src="client/js/jquery.magnific-popup.min.js"></script>
+        <!-- Ticker Js -->
+        <script src="client/js/ticker.js" type="text/javascript"></script>
+        <!-- Custom Js -->
+        <script src="client/js/main.js" type="text/javascript"></script>
+            </div>
+            

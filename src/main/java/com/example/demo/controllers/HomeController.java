@@ -24,7 +24,7 @@ public class HomeController {
 	@Autowired
 	articlesService articlesService;
 	
-	@GetMapping("/Home")
+	@GetMapping("/")
 	public String getArticles(Model model, HttpSession session) {
 		List<Categories> listCategories = service.getlist();
 		model.addAttribute("data", listCategories);
@@ -33,7 +33,6 @@ public class HomeController {
 		if (loggedInUser != null) {
 	        model.addAttribute("username", loggedInUser.getUsername());
 	        model.addAttribute("role", loggedInUser.getRole());
-	        
 	    } else {
 	        model.addAttribute("username", null);
 	    }

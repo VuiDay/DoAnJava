@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpSession;
 public class categoriesController {
 	@Autowired
 	categoriesService service;
-	@GetMapping("/")
+	@GetMapping("/Home")
 	public String getArticles(Model model, HttpSession session) {
 		List<Categories> listCategories = service.getlist();
 		model.addAttribute("data", listCategories);
@@ -28,6 +28,6 @@ public class categoriesController {
 	    } else {
 	        model.addAttribute("username", null);
 	    }
-		return "index";
+		return "client/detailArticle";
 	}
 }

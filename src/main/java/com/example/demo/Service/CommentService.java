@@ -1,6 +1,6 @@
 package com.example.demo.Service;
 
-import javax.xml.stream.events.Comment;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +11,14 @@ import com.example.demo.repostory.CommentRepository;
 @Service
 public class CommentService {
 
-	 @Autowired
-	    private CommentRepository commentRepository;
+	@Autowired
+    private CommentRepository commentsRepository;
 
-	    public void addComment(Comments comment) {
-	        commentRepository.save(comment);  
-	    }
+    public void save(Comments comment) {
+        commentsRepository.save(comment);
+    }
+
+    public List<Comments> findByArticleId(int articleId) {
+        return commentsRepository.findByArticleId(articleId);
+    }
 }

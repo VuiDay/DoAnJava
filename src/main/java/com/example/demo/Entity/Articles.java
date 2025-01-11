@@ -1,5 +1,6 @@
 package com.example.demo.Entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,9 @@ public class Articles {
     private String title;
     private String content;
     private String image;
-    private String created_at;
+
+    @Column(name = "created_at", columnDefinition = "DATETIME")
+    private LocalDateTime created_at;
     
     @OneToMany(mappedBy = "article" , cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Comments> comments  = new ArrayList<>();
@@ -31,7 +34,7 @@ public class Articles {
     public Articles() {
     }
 
-	public Articles(int id, String title, String content, String image, String created_at, List<Comments> comments,
+	public Articles(int id, String title, String content, String image, LocalDateTime created_at, List<Comments> comments,
 			User user, Categories category) {
 		super();
 		this.id = id;
@@ -76,11 +79,11 @@ public class Articles {
 		this.image = image;
 	}
 
-	public String getCreated_at() {
+	public LocalDateTime getCreated_at() {
 		return created_at;
 	}
 
-	public void setCreated_at(String created_at) {
+	public void setCreated_at(LocalDateTime created_at) {
 		this.created_at = created_at;
 	}
 
@@ -107,5 +110,7 @@ public class Articles {
 	public void setCategory(Categories category) {
 		this.category = category;
 	}
+
+	
 
 }

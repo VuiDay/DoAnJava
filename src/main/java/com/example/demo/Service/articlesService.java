@@ -31,6 +31,11 @@ public class articlesService {
     public List<Articles> getlist() {
         return repo.findAll(); // Lấy tất cả các bài viết
     }
+    
+    public Articles findById(Integer id) {
+        return repo.findById(id)
+                   .orElseThrow(() -> new IllegalArgumentException("Bài viết không tồn tại!"));
+    }
 
     // Lưu hoặc cập nhật bài viết
     public Articles save(Articles article) {

@@ -1,5 +1,7 @@
 package com.example.demo.Entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -10,7 +12,9 @@ public class Comments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String comment;
-    private String created_at;
+    
+    @Column(name = "created_at", columnDefinition = "DATETIME")
+    private LocalDateTime created_at;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -23,7 +27,7 @@ public class Comments {
     public Comments() {
     } // No argument constructor is required by JPA
     
-	public Comments(int id, String comment, User user, Articles article, String created_at) {
+	public Comments(int id, String comment, User user, Articles article, LocalDateTime created_at) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -48,11 +52,11 @@ public class Comments {
 		this.comment = comment;
 	}
 
-	public String getCreated_at() {
+	public LocalDateTime getCreated_at() {
 		return created_at;
 	}
 
-	public void setCreated_at(String created_at) {
+	public void setCreated_at(LocalDateTime created_at) {
 		this.created_at = created_at;
 	}
 
@@ -71,5 +75,7 @@ public class Comments {
 	public void setArticle(Articles article) {
 		this.article = article;
 	}
+
+	
 	
 }

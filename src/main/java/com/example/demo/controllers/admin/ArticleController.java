@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -17,9 +18,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Entity.Articles;
+import com.example.demo.Entity.User;
 import com.example.demo.Service.articlesService;
 import com.example.demo.Service.categoriesService;
 import com.example.demo.Service.userService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin/articles")
@@ -32,9 +36,8 @@ public class ArticleController {
     private userService userService;
 
     // Thêm method để lấy thời gian hiện tại
-    private String getCurrentDateTime() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        return formatter.format(new Date());
+    private LocalDateTime getCurrentDateTime() {
+        return LocalDateTime.now();
     }
 
     @GetMapping("")
@@ -50,6 +53,18 @@ public class ArticleController {
         model.addAttribute("categories", categoryService.getlist());
         model.addAttribute("users", userService.getList());
         return "admin/articles/add";
+    }
+    
+    @GetMapping("/client-add")
+    public String addClient(Model model, HttpSession session) {
+    	User currentUser = userService.getLoggedInUser(session);
+        if(currentUser == null) {
+        	return "redirect:/login";
+        }
+        model.addAttribute("article", new Articles());
+        model.addAttribute("categories", categoryService.getlist());
+        model.addAttribute("users", userService.getList());
+        return "client/articles/add";
     }
 
     @PostMapping("/add")
@@ -75,6 +90,31 @@ public class ArticleController {
         }
         articleService.save(article);
         return "redirect:/admin/articles";
+    }
+    
+    @PostMapping("/client-add")
+    public String addPostClient(@ModelAttribute Articles article, 
+            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
+        // Thêm thời gian tạo
+        article.setCreated_at(getCurrentDateTime());
+
+        if (imageFile != null && !imageFile.isEmpty()) {
+            try {
+                String fileName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
+                Path uploadPath = Paths.get("src/main/resources/static/uploads/");
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+                Files.copy(imageFile.getInputStream(), 
+                        uploadPath.resolve(fileName),
+                        StandardCopyOption.REPLACE_EXISTING);
+                article.setImage("/uploads/" + fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        articleService.save(article);
+        return "redirect:/";
     }
 
     @GetMapping("/edit/{id}")

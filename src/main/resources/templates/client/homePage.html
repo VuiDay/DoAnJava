@@ -34,6 +34,15 @@
         <link rel="stylesheet" type="text/css" href="client/css/ie-only.css" />
         <!-- Modernizr Js -->
         <script src="js/modernizr-2.8.3.min.js"></script>
+        <style>
+        	.truncate {
+            	overflow: hidden;
+            	text-overflow: ellipsis;
+            	display: -webkit-box;
+            	-webkit-line-clamp: 3;
+            	-webkit-box-orient: vertical;
+        	}
+        </style>
     </head>
 
     <body>
@@ -49,99 +58,7 @@
         <!-- Preloader End Here -->
         <div id="wrapper">
             <!-- Header Area Start Here -->
-            <header>
-                <div id="header-layout2" class="header-style2">
-                    <div class="header-top-bar">
-                        
-                        <div class="top-bar-bottom bg-body pt-20 d-none d-lg-block">
-                            <div class="container">
-                                <div class="row d-flex align-items-center">
-                                    <div class="col-lg-4 col-md-4 col-sm-4">
-                                        <div class="logo-area">
-                                            <a href="index-2.html" class="img-fluid">
-                                                <img src="client/img/logo-dark.png" alt="logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <div class="ne-banner-layout1 pull-right">
-                                            <a href="#">
-                                                <img src="client/img/banner/banner2.jpg" alt="ad" class="img-fluid">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="main-menu-area bg-body" id="sticker">
-                        <div class="container">
-                            <div class="row no-gutters d-flex align-items-center">
-                                <div class="col-lg-10 position-static d-none d-lg-block">
-                                    <div class="ne-main-menu">
-                                        <nav id="dropdown">
-                                            <ul>
-                                                <li class="active">
-                                                    <a href="/home">Home</a>
-                                                </li>
-                                                <li th:each="item:${data}">
-                                                    <a th:href="@{/category/{id}(id=${item.id})}" th:text="${item.name}" href="post-style-1.html"></a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-12 text-right position-static">
-                                    <div class="header-action-item on-mobile-fixed">
-                                        <ul style="display: flex; ">
-                                            <li class="">
-                                                <a th:if="${username == null}" href="/login" type="button" class="login-btn" >
-                                                    <i class="fa fa-user" aria-hidden="true"></i>Sign in
-                                                </a>
-                                                
-                                                <a href="#" style="color: black;" class="login-btn" th:if="${username != null}" title="User">Xin chào, <span th:text="${username}"></span></a>
-                                                
-                                                <a href="/logout" style="color: white; background-color: coral; border-radius: 50px; text-align: center" class="login-btn" th:if="${username != null}" title="Entertainment">Đăng xuất</a>
-                                            </li>
-                                            <li>
-                                                <a  style="color: black;"  th:if="${role == 1}" href="/admin" type="button" class="login-btn">
-    												<i class="fa fa-user"  aria-hidden="true"></i> Admin
-												</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-            <!-- Header Area End Here -->
-            <!-- News Feed Area Start Here -->
-            <section class="bg-accent add-top-margin">
-                <div class="container">
-                    <div class="row no-gutters d-flex align-items-center">
-                        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
-                            <div class="topic-box mt-10 mb-10">Top Stories</div>
-                        </div>
-                        <div class="col-lg-10 col-md-9 col-sm-8 col-6">
-                            <div class="feeding-text-dark">
-                                <ol id="sample" class="ticker">
-                                    <li>
-                                        <a href="#">Chia sẻ những thông tin bổ ich của bạn với mọi người</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Tin tức được kiểm duyệt gắt gao</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">Tin tức mới theo ngày</a>
-                                    </li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div th:include="client/header :: header"></div>
             <!-- News Feed Area End Here -->
             <!-- News Slider Area Start Here -->
             <!-- News Slider Area End Here -->
@@ -191,29 +108,29 @@
                                             <div class="row">
                                                 <div class="col-sm-6 col-12">
                                                     <div th:each="article : ${item.articles}" class="col-xl-12 col-lg-6 col-md-6 col-sm-12">
-                                    <div class="media media-none--lg mb-30">
+                                    <div class="media media-none--lg mb-30" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; padding: 20px; width: 500px;">
                                         <div class="position-relative width-40">
-                                            <a th:href="@{/articles/{id}(id=${article.id})}" class="img-opacity-hover img-overlay-70">
-                                               <img th:src="@{${article.image}}" alt="news" class="img-fluid">
-                                            </a>
-                                            
+                                            <a th:href="@{/articles/{id}(id=${article.id})}" class="img-opacity-hover img-overlay-70" style="display: flex; justify-content: start; align-items: start; width: 200px; height: 100px; overflow: hidden;">
+            									<img th:src="@{${article.image}}" alt="news" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;">
+        									</a>
                                         </div>
                                         <div class="media-body p-mb-none-child media-margin30">
                                             <div class="post-date-dark">
                                                 <ul>
-                                                    <li >
+                                                    <li>
                                                         <span>
                                                             <i class="fa fa-calendar" aria-hidden="true"></i>
                                                             <span th:text="${article.created_at}"></span>
-                                                            
-                                                        </span></li>
+                                                        </span>
+                                                    </li>
                                                 </ul>
                                             </div>
                                             <h3 class="title-semibold-dark size-lg mb-15">
                                                 <a  th:href="@{/articles/{id}(id=${article.id})}" th:text="${article.title}"></a>
                                             </h3>
-                                            <p th:text="${article.content}">
-                                            </p>
+                                            <div >
+                                            	<p class="truncate" th:text="${article.content}"></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
