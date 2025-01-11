@@ -47,13 +47,17 @@ public class CategoryController {
         model.addAttribute("category", category);
         return "admin/category/edit";
     }
-
-    @PostMapping("/edit/{id}")
-    public String editPost(@PathVariable Integer id, @ModelAttribute Categories category) {
-        categoryService.save(category);
-        return "redirect:/admin/category";
-    }
     
+    @PostMapping("/edit/{id}") 
+    public String editPost(@PathVariable Integer id, @ModelAttribute Categories category) {
+    Categories existingCategory = categoryService.findById(id);
+    if (existingCategory != null) {
+        existingCategory.setName(category.getName());
+        categoryService.save(existingCategory);
+    }
+    return "redirect:/admin/category";
+    }
+
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
         categoryService.deleteById(id);
