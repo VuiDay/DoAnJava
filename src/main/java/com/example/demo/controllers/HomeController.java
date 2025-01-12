@@ -43,6 +43,8 @@ public class HomeController {
 	 @GetMapping("/category/{id}")
 	    public String health(@PathVariable Integer id, Model model) {	
 	    	List<Articles> businessArticles = articlesService.getArticlesByCategoryId(id);
+	    	Categories category  = service.findById(id);
+	    	model.addAttribute("category", category.getName());
 	        model.addAttribute("articles", businessArticles);
 	        return "client/archive"; 
 	    }

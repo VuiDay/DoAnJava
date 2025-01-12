@@ -62,9 +62,9 @@
                                                 <li th:each="item:${data}">
                                                     <a th:href="@{/category/{id}(id=${item.id})}" th:text="${item.name}" href="post-style-1.html"></a>
                                                 </li>
-                                                <li class="active">
-                                                    <a href="/admin/articles/client-add">Thêm bài việt</a>
-                                                </li>
+                                                <li th:if="${role == 2 || role == 1}" class="active">
+    												<a th:href="@{/admin/articles/client-add}">Thêm bài viết</a>
+												</li>
                                             </ul>
                                         </nav>
                                     </div>

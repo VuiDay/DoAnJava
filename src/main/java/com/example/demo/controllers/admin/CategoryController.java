@@ -48,10 +48,14 @@ public class CategoryController {
         return "admin/category/edit";
     }
 
-    @PostMapping("/edit/{id}")
+    @PostMapping("/edit/{id}") 
     public String editPost(@PathVariable Integer id, @ModelAttribute Categories category) {
-        categoryService.save(category);
-        return "redirect:/admin/category";
+    Categories existingCategory = categoryService.findById(id);
+    if (existingCategory != null) {
+        existingCategory.setName(category.getName());
+        categoryService.save(existingCategory);
+    }
+    return "redirect:/admin/category";
     }
     
     @GetMapping("/delete/{id}")
