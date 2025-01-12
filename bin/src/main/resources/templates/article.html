@@ -36,27 +36,28 @@
           <a href="index.html" title="Frivizn logo">Frivizn</a>
         </div>
 
-        <!-- Navigation -->
+       <!-- Navigation -->
         <nav class="nav-menu" role="navigation">
           <ul class="nav-links">
-            <li><a href="index.html" title="Home">Home</a></li>
-            <li><a href="#article.html" title="World">World</a>
-            <li><a href="#politics" title="Politics">Politics</a></li>
-            <li><a href="#business" title="Business">Business</a></li>
-            <li><a href="#sport" title="Sport">Sport</a></li>
-            <li><a href="#entertainment" title="Entertainment">Entertainment</a></li>
+             <li><a th:href="@{/Home}" title="Home">Trang chủ</a></li>
+			<li><a th:href="@{/technology}" title="Technology">Công nghệ</a></li>
+			<li><a th:href="@{/health}" title="Health">Sức khỏe</a></li>
+			<li><a th:href="@{/business}" title="Business">Kinh doanh</a></li>
+			<li><a th:href="@{/sport}" title="Sport">Thể thao</a></li>
+			<li><a th:href="@{/entertainment}" title="Entertainment">Giải trí</a></li>
             <li>
-              <a href="#more" title="More">More...<span class="dropdown-toggle" aria-expanded="false"></span>
-                <span class="screen-reader-text">Expand child menu</span></a>
+              <a href="#" th:if="${username != null}" title="User">Xin chào, <span th:text="${username}"></span></a>
+				<a href="/login" th:if="${username == null}" title="Login">Đăng nhập</a>
               <ul class="sub-menu">
-                <li><a href="#science" title="Science">Science</a></li>
-                <li><a href="#travel" title="Travel">Travel</a></li>
-                <li><a href="#health" title="Health">Health</a></li>
-                <li><a href="#style" title="Style">Style</a></li>
-                <li><a href="#weather" title="Weather">Weather</a></li>
-                <li><a href="#video" title="Video">Video</a></li>
+                <li><a href="#" title="Science">Khoa học</a></li>
+                <li><a href="#" title="Travel">Du lịch</a></li>
+                <li><a href="#" title="Health">Sức khoẻ</a></li>
+                <li><a href="#" title="Style">Phong cách</a></li>
+                <li><a href="#" title="Weather">Thời tiết</a></li>
+                <li><a href="#" title="Video">Video</a></li>
               </ul>
             </li>
+            <li><a href="/logout" th:if="${username != null}" title="Entertainment">Đăng xuất</a></li>
           </ul>
           <div class="burger">
             <div class="line-1"></div>
@@ -73,56 +74,16 @@
 
       <article class="article">
 
-        <h2>Laborum Delectus numquam Soluta ratione</h2>
-        <p><small>Tuesday, Sept. 17, 16:15h</small><br>[[${author.username}]]</p>
-
-        <div class="headline"></div>
-
-        <p class="intro-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, nemo quo inventore,
-          maxime iure consectetur adipisicing elit. Quo quasi enim praesentium tenetur quam,
-          consequuntur quisquam officia itaque. Fuga aperiam tempore neque</p>
-
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim aliquid recusandae dolore beatae
-          consequuntur odit vero. Nihil, veniam laborum</p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo quasi enim praesentium tenetur quam,
-          consequuntur quisquam officia itaque. Fuga aperiam tempore neque, qui facere distinctio nisi illum minus iure!
-          Ullam enim expedita qui beatae voluptatibus ex non possimus ea doloribus.</p>
-
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates rem accusamus at adipisci ipsum dolore
-        </p>
+        <h2>[[${article.title}]]</h2>
+        <p><small>[[${article.created_at}]]</small><br><small>Tài khoản : [[${author.username}]]</small></p>
 
         <figure>
-          <img src="images/world5.jpg" alt="Bridge night image">
-          <figcaption>Pellentesque nec viverra felis</figcaption>
+          <img src="[[${article.image}]]" alt="Không tìm thấy">
+          <figcaption>Hình ảnh</figcaption>
         </figure>
-
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, ex!</p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis laudantium repellat molestias soluta
-          tempore ab quo facilis provident doloremque debitis.</p>
-
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad officiis nihil perspiciatis odio fugit
-          asperiores! Eveniet beatae, quaerat repudiandae voluptatum ut, doloribus quas blanditiis non voluptatem magni
-          autem molestiae sequi iusto voluptas eius repellendus, mollitia fugiat quasi enim soluta ex!</p>
-
-        <figure>
-          <img src="images/world10.jpg" alt="Bridge night image">
-          <figcaption>Nam egestas enim vestibulum</figcaption>
-        </figure>
-
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quis eius facilis rerum exercitationem
-          culpa.</p>
-
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum, optio eos itaque ratione culpa placeat
-          molestias, voluptates sed dolorem eveniet libero laudantium hic. Velit, esse magni! Voluptatum nostrum
-          exercitationem quibusdam.</p>
-
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi molestiae illum recusandae exercitationem
-          voluptatum pariatur omnis animi. Deserunt maxime alias veritatis mollitia fugiat velit blanditiis dolores
-          facere quaerat odio! Laboriosam inventore voluptatum itaque corporis dolorum explicabo suscipit provident
-          aperiam expedita.</p>
-
+		<h4>Nội dung</h4>
+		<p>[[${article.content}]]</p>
+        
         <!-- Comments -->
         <div class="comments">
 
@@ -168,9 +129,6 @@
 
         <div class="form-container">
           <form action="index.php">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" placeholder="Your name..">
-
             <label for="comment">Comment</label>
             <textarea id="comment" name="comment" placeholder="Your comment.." style="height:200px"></textarea>
 
@@ -182,13 +140,18 @@
 
       <!-- Sidebar -->
       <aside class="sidebar" role="complementary">
-        <h2>Most Read</h2>
-        <a href="#">
-          <div class="sidebar-headline">
-            <h3>Pariatur laboriosam voluptatum labore tenetur</h3>
-            <p class="exact-time">13:53h</p>
-          </div>
-        </a>
+        <h2>Bài viết khác</h2>
+		<div th:if="${#lists.isEmpty(limitedArticles)}">
+		    <p>Không có bài viết nào khác.</p>
+		</div>
+		<div th:each="otherArticle : ${limitedArticles}">
+		    <a th:href="@{/articles/{id}(id=${otherArticle.id})}">
+		        <div class="sidebar-headline">
+		            <h3 th:text="${otherArticle.title}"></h3>
+		            <p class="exact-time" th:text="${otherArticle.created_at}"></p>
+		        </div>
+		    </a>
+		</div>
 
         <a href="#">
           <div class="sidebar-headline">
@@ -197,62 +160,7 @@
           </div>
         </a>
 
-        <a href="#">
-          <div class="sidebar-headline">
-            <h3>Pariatur laboriosam voluptatum labore tenetur</h3>
-            <p class="exact-time">13:53h</p>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="sidebar-headline">
-            <h3>Pariatur laboriosam voluptatum labore tenetur</h3>
-            <p class="exact-time">13:53h</p>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="sidebar-headline">
-            <h3>Pariatur laboriosam voluptatum labore tenetur</h3>
-            <p class="exact-time">13:53h</p>
-          </div>
-        </a>
-
-        <h2>Top Comments</h2>
-        <a href="#">
-          <div class="sidebar-headline top-comments">
-            <h3>Pariatur laboriosam voluptatum labore tenetur</h3>
-            <p class="exact-time">1</p>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="sidebar-headline top-comments">
-            <h3>Pariatur laboriosam voluptatum labore tenetur</h3>
-            <p class="exact-time">2</p>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="sidebar-headline top-comments">
-            <h3>Pariatur laboriosam voluptatum labore tenetur</h3>
-            <p class="exact-time">3</p>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="sidebar-headline top-comments">
-            <h3>Pariatur laboriosam voluptatum labore tenetur</h3>
-            <p class="exact-time">4</p>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="sidebar-headline top-comments">
-            <h3>Pariatur laboriosam voluptatum labore tenetur</h3>
-            <p class="exact-time">5</p>
-          </div>
-        </a>
+ 
       </aside> <!-- End of  class="sidebar" -->
 
     </main> <!-- End of  class="main-article" -->
@@ -269,19 +177,7 @@
         <li><a href="http://instagram.com"><span class="screen-reader-text">Instagram</span></a></li>
       </ul>
 
-      <ul class="main-footer-links">
-        <li><a href="#world" title="World">World</a>
-        <li><a href="#politics" title="Politics">Politics</a></li>
-        <li><a href="#business" title="Business">Business</a></li>
-        <li><a href="#sport" title="Sport">Sport</a></li>
-        <li><a href="#entertainment" title="Entertainment">Entertainment</a></li>
-        <li><a href="#science" title="Science">Science</a></li>
-        <li><a href="#travel" title="Travel">Travel</a></li>
-        <li><a href="#health" title="Health">Health</a></li>
-        <li><a href="#style" title="Style">Style</a></li>
-        <li><a href="#weather" title="Weather">Weather</a></li>
-        <li><a href="#video" title="Video">Video</a></li>
-      </ul>
+      
 
       <ul class="info-links">
         <li><a href="#terms-of-use" title="Terms of Use">Terms of Use</a></li>
