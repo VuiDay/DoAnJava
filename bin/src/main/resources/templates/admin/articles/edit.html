@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="admin/fragments/head :: head"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+        <header th:replace="admin/fragments/header :: header"></header>
+        <aside th:replace="admin/fragments/sidebar :: sidebar"></aside>
+        
+        <div class="content-wrapper">
+            <section class="content-header">
+                <h1>Chỉnh Sửa Bài Viết</h1>
+            </section>
+
+            <section class="content">
+                <div class="box">
+                    <div class="box-body">
+                        <form th:action="@{/admin/articles/edit/{id}(id=${article.id})}" 
+                              method="post" 
+                              enctype="multipart/form-data" 
+                              th:object="${article}">
+                            
+                            <div class="form-group">
+                                <label>Tiêu đề</label>
+                                <input type="text" class="form-control" th:field="*{title}" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Nội dung</label>
+                                <textarea class="form-control" th:field="*{content}" rows="5" required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Hình ảnh hiện tại</label>
+                                <img th:if="*{image}" th:src="@{/uploads/{img}(img=*{image})}" 
+                                     style="max-width: 200px;">
+                                <input type="file" name="imageFile" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Danh mục</label>
+                                <select class="form-control" th:field="*{category.id}">
+                                    <option th:each="category : ${categories}" 
+                                            th:value="${category.id}" 
+                                            th:text="${category.name}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tác giả</label>
+                                <select class="form-control" th:field="*{user.id}">
+                                    <option th:each="user : ${users}" 
+                                            th:value="${user.id}" 
+                                            th:text="${user.username}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
+                            <a th:href="@{/admin/articles}" class="btn btn-default">Hủy</a>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <footer th:replace="admin/fragments/footer :: footer"></footer>
+    </div>
+</body>
+</html>

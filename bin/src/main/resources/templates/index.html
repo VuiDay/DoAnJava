@@ -39,12 +39,13 @@
         <!-- Navigation -->
         <nav class="nav-menu" role="navigation">
           <ul class="nav-links">
-            <li><a href="${Home}" title="Home">Trang chủ</a></li>
-            <li><a href="article.html" title="World">Thế giới</a>
-            <li><a href="#politics.html" title="Politics">Chính trị</a></li>
-            <li><a href="#business.html" title="Business">Kinh doanh</a></li>
-            <li><a href="#sport.html" title="Sport">Thể thao</a></li>
-            <li><a href="#entertainment.html" title="Entertainment">Giải trí</a></li>
+            <li><a th:href="@{/Home}" title="Home">Trang chủ</a></li>
+			<li><a th:href="@{/technology}" title="Technology">Công nghệ</a></li>
+			<li><a th:href="@{/health}" title="Health">Sức khỏe</a></li>
+			<li><a th:href="@{/business}" title="Business">Kinh doanh</a></li>
+			<li><a th:href="@{/sport}" title="Sport">Thể thao</a></li>
+			<li><a th:href="@{/entertainment}" title="Entertainment">Giải trí</a></li>
+
             <li>
               <a href="#" th:if="${username != null}" title="User">Xin chào, <span th:text="${username}"></span></a>
 				<a href="/login" th:if="${username == null}" title="Login">Đăng nhập</a>
@@ -84,7 +85,7 @@
         </section> <!-- End of class="latest-news" -->
 
         <section class="top-stories">
-          <h2>Top Stories</h2>
+          <h2>Tin nổi bật</h2>
           <div class="headline headline-1">
             <a href="#">
               <h1>Quisque sit amet mi lectus</h1>
@@ -108,14 +109,14 @@
       <div >
 	      <section th:each="item:${data}" class="world">
 	        <h2 th:text="${item.name}"></h2>
-	        <div th:each="article:${item.articles}"  class="story story-1">
-              <a th:href="@{/article/{id}(id=${article.id})}">
+	        <div th:each="articles:${item.articles}"  class="story story-1">
+              <a th:href="@{/articles/{id}(id=${articles.id})}">
                 <div class="story-img">
-                  <img th:src="${article.image}" alt="Protesters">
+                  <img th:src="${articles.image}" alt="Protesters">
                 </div>
                 <div class="story-headline">
-                  <h3 th:text="${article.title}"></h3>
-                  <p th:text="${article.created_at}" class="exact-time"></p>
+                  <h3 th:text="${articles.title}"></h3>
+                  <p th:text="${articles.created_at}" class="exact-time"></p>
                 </div>
               </a>
             </div>
@@ -123,7 +124,7 @@
       </div>
 
      
-        <h2>Giải trí</h2>
+        <!-- <h2>Giải trí</h2>
         <div class="story">
           <a href="#">
             <div class="story-img">
@@ -171,67 +172,23 @@
             </div>
           </a>
         </div>
-      </section> <!-- End of class="entertainment" -->
+      </section>  -->
+      <!-- End of class="entertainment" -->
 
-      <section class="more">
-        <h2>More...</h2>
-        <a href="#">
+      <!-- section class="more">
+        <h2>Xem thêm</h2>
+       
+        <a th:href="@{/article/{id}(id=${otherArticle.id})}">
           <div class="more-headline">
-            <h3>Cras fringilla porta vehicula. Etiam turpis tellus</h3>
-            <p class="exact-time">13:53h</p>
+            <h3  th:text="${otherArticle.title}"></h3>
+            <p class="exact-time"th:text="${otherArticle.created_at}" ></p>
           </div>
         </a>
 
-        <a href="#">
-          <div class="more-headline">
-            <h3>pretium ac purus at, pretium dapibus velit</h3>
-            <p class="exact-time">13:53h</p>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="more-headline">
-            <h3>Sed ac elit posuere, cursus risus porttitor</h3>
-            <p class="exact-time">13:53h</p>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="more-headline">
-            <h3>Nam egestas, enim a lobortis vestibulum</h3>
-            <p class="exact-time">13:53h</p>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="more-headline">
-            <h3>Ligula massa commodo nulla, nec convallis arcu risus</h3>
-            <p class="exact-time">13:53h</p>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="more-headline">
-            <h3>Vestibulum dapibus, risus vel condimentum porta</h3>
-            <p class="exact-time">13:53h</p>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="more-headline">
-            <h3>a condimentum est nisl sed felis</h3>
-            <p class="exact-time">13:53h</p>
-          </div>
-        </a>
-
-        <a href="#">
-          <div class="more-headline">
-            <h3>Nullam rhoncus tincidunt felis at auctor donec</h3>
-            <p class="exact-time">13:53h</p>
-          </div>
-        </a>
-
-      </section> <!-- End of class="more" -->
+      
+      </section>  -->
+      
+      <!-- End of class="more" -->
 
     </main> <!-- End of class="main" -->
 
@@ -247,19 +204,7 @@
         <li><a href="http://instagram.com"><span class="screen-reader-text">Instagram</span></a></li>
       </ul>
 
-      <ul class="main-footer-links">
-        <li><a href="#world" title="World">World</a>
-        <li><a href="#politics" title="Politics">Politics</a></li>
-        <li><a href="#business" title="Business">Business</a></li>
-        <li><a href="#sport" title="Sport">Sport</a></li>
-        <li><a href="#entertainment" title="Entertainment">Entertainment</a></li>
-        <li><a href="#science" title="Science">Science</a></li>
-        <li><a href="#travel" title="Travel">Travel</a></li>
-        <li><a href="#health" title="Health">Health</a></li>
-        <li><a href="#style" title="Style">Style</a></li>
-        <li><a href="#weather" title="Weather">Weather</a></li>
-        <li><a href="#video" title="Video">Video</a></li>
-      </ul>
+     
 
       <ul class="info-links">
         <li><a href="#terms-of-use" title="Terms of Use">Terms of Use</a></li>
@@ -280,7 +225,7 @@
 
     <!-- Footer Credit -->
     <footer role="contentinfo">
-      <p>2019 &copy; by Frivizn Studio</p>
+      <p>2024 &copy; by Frivizn Studio</p>
       <a class="scroll-top" href="#top"></a>
     </footer>
 
