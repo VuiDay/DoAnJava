@@ -31,9 +31,12 @@ public class GlobalController {
         model.addAttribute("data", listCategories);
         
         System.out.println("Data nè: " + listCategories);
-
+        
         User loggedInUser = (User) session.getAttribute("loggedInUser");
+        
         if (loggedInUser != null) {
+        	model.addAttribute("userId", loggedInUser.getId());
+        	
             model.addAttribute("username", loggedInUser.getUsername());
             model.addAttribute("role", loggedInUser.getRole());
         } else {

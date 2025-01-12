@@ -125,6 +125,15 @@ public class ArticleController {
         model.addAttribute("users", userService.getList());
         return "admin/articles/edit";
     }
+    
+    @GetMapping("/edit-client/{id}")
+    public String editClient(@PathVariable("id") Integer id, Model model) {
+        Articles article = articleService.getDetail(id);
+        model.addAttribute("article", article);
+        model.addAttribute("categories", categoryService.getlist());
+        model.addAttribute("users", userService.getList());
+        return "client/articles/edit";
+    }
 
     @PostMapping("/edit/{id}")
     public String editPost(@PathVariable("id") Integer id, 
@@ -160,6 +169,41 @@ public class ArticleController {
         articleService.save(article);
         return "redirect:/admin/articles";
     }
+    
+    @PostMapping("/edit-client/{id}")
+    public String editPostClient(@PathVariable("id") Integer id, 
+            @ModelAttribute Articles article,
+            @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
+        Articles existingArticle = articleService.getDetail(id);
+        
+        // Cập nhật thời gian sửa
+        article.setCreated_at(getCurrentDateTime());
+        
+        article.setId(id);
+        if (imageFile != null && !imageFile.isEmpty()) {
+            try {
+                String fileName = UUID.randomUUID().toString() + "_" + imageFile.getOriginalFilename();
+                Path uploadPath = Paths.get("src/main/resources/static/uploads/");
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+                if (existingArticle.getImage() != null) {
+                    Path oldImagePath = uploadPath.resolve(existingArticle.getImage().replace("/uploads/", ""));
+                    Files.deleteIfExists(oldImagePath);
+                }
+                Files.copy(imageFile.getInputStream(), 
+                        uploadPath.resolve(fileName),
+                        StandardCopyOption.REPLACE_EXISTING);
+                article.setImage("/uploads/" + fileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            article.setImage(existingArticle.getImage());
+        }
+        articleService.save(article);
+        return "redirect:/articles/" + id;
+    }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id) {
@@ -175,5 +219,21 @@ public class ArticleController {
         }
         articleService.deleteById(id);
         return "redirect:/admin/articles";
+    }
+    
+    @GetMapping("/delete-client/{id}")
+    public String deleteClient(@PathVariable("id") Integer id) {
+        Articles article = articleService.getDetail(id);
+        if (article.getImage() != null) {
+            try {
+                Path imagePath = Paths.get("src/main/resources/static/uploads/")
+                        .resolve(article.getImage().replace("/uploads/", ""));
+                Files.deleteIfExists(imagePath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        articleService.deleteById(id);
+        return "redirect:/";
     }
 }

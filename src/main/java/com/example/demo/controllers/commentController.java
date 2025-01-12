@@ -61,4 +61,19 @@ public class commentController {
         // Redirect về trang chi tiết bài viết
         return "redirect:/articles/" + articleId;
     }
+    
+    @GetMapping("/delete/{commentId}/{articleId}")
+    public String deleteComment(@PathVariable int commentId, 
+                                @PathVariable int articleId, 
+                                HttpSession session) {
+        User currentUser = userService.getLoggedInUser(session);
+        if (currentUser == null) {
+            return "redirect:/login";
+        }
+
+
+        commentsService.deleteCommentById(commentId);
+
+        return "redirect:/articles/" + articleId;
+    }
 }

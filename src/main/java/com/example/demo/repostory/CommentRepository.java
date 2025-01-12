@@ -10,5 +10,7 @@ import com.example.demo.Entity.Comments;
 @Repository
 public interface CommentRepository extends JpaRepository<Comments, Integer> {
     List<Comments> findByArticleId(int articleId);
+    
+    void deleteById(int id);
 }
 
